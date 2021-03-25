@@ -11,19 +11,16 @@ jobs:
       #- python/install-deps
       #- python/save-cache
       - run: python predictModelTest.py 1 10  
-  test_model:
+  build_model:
     executor: machine
     steps:
       - checkout
-      #- python/load-cache
-      #- python/install-deps
-      #- python/save-cache
       - run: python predictModelTest.py 11 20 
 workflows:
   version: 2
   one_and_two:
     jobs:
       - test_model
-      - two:
+      - build_model:
           requires:
             - test_model
