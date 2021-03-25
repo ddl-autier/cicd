@@ -17,18 +17,18 @@ jobs:
     executor: machine
     steps:
       - checkout
-      - run: python predictModelTest.py 11 20
+      - run: sh predictModelBuild.sh
   test-build:
     executor: machine
     steps:
       - checkout
-      - run: python predictModelTest.py 11 20 
+      - run: sh predictModelTestBuild.sh
 
   export-model-to-ECR:
     executor: machine
     steps:
       - checkout
-      - run: python predictModelTest.py 11 20
+      - run: sh predictModelExport.sh
 
       
 workflows:
