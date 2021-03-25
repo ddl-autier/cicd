@@ -1,7 +1,7 @@
 version: 2
 jobs:
   test_model:
-    executor: shell
+    executor: machine
     steps:
       - checkout
       - python/load-cache
