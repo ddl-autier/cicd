@@ -1,7 +1,7 @@
 version: 2
 jobs:
   test_model:
-    executor: macos
+    executor: shell
     steps:
       - checkout
       - python/load-cache
