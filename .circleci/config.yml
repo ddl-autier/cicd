@@ -4,7 +4,7 @@ orbs:
 
 jobs:
   test_model:
-    executor: python/default
+    executor: machine
     steps:
       - checkout
       - python/load-cache
