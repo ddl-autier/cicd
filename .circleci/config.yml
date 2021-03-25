@@ -3,7 +3,7 @@ orbs:
   python: circleci/python@0.2.1
 
 jobs:
-  test_model:
+  test-model:
     executor: machine
     steps:
       - checkout
@@ -11,16 +11,38 @@ jobs:
       #- python/install-deps
       #- python/save-cache
       - run: python predictModelTest.py 1 10  
-  build_model:
+      
+  build-model:
+    executor: machine
+    steps:
+      - checkout
+      - run: python predictModelTest.py 11 20
+  test-build:
     executor: machine
     steps:
       - checkout
       - run: python predictModelTest.py 11 20 
+
+  export-model-to-ECR:
+    executor: machine
+    steps:
+      - checkout
+      - run: python predictModelTest.py 11 20
+
+      
 workflows:
   version: 2
-  one_and_two:
+  main:
     jobs:
-      - test_model
-      - build_model:
+      - test-model
+      - build-model:
+          requires:
+            - test-model
+      - test-build:
+          requires:
+            - build-model 
+      - export-model-to-ECR:
           requires:
             - test_model
+            - build-model
+            - test-build
