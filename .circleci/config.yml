@@ -10,7 +10,7 @@ jobs:
       #- python/load-cache
       #- python/install-deps
       #- python/save-cache
-      - run: python3 predictModelTest.py 1 10  
+      - run: python predictModelTest.py 1 10  
   two:
     docker:
       - image: circleci/ruby:2.4.1
