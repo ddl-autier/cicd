@@ -11,7 +11,7 @@ jobs:
       #- python/load-cache
       #- python/install-deps
       #- python/save-cache
-      - run: python predictModelTest.py 1 10  
+      - run: ./predictModelTest.sh
       
   build-model:
     executor: machine
