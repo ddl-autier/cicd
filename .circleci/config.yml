@@ -1,3 +1,4 @@
+# CICD Demo
 version: 2
 orbs:
   python: circleci/python@0.2.1
@@ -43,6 +44,6 @@ workflows:
             - build-model 
       - export-model-to-ECR:
           requires:
-            - test_model
+            - test-model
             - build-model
             - test-build
