@@ -11,25 +11,14 @@ jobs:
       #- python/install-deps
       #- python/save-cache
       - run: python predictModelTest.py 1 10  
-  two:
-    docker:
-      - image: circleci/ruby:2.4.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  test_model:
+    executor: machine
     steps:
       - checkout
-      - run: echo "A more familiar hi"  
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: my_workspace
-
-      - run: |
-          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
+      #- python/load-cache
+      #- python/install-deps
+      #- python/save-cache
+      - run: python predictModelTest.py 11 20 
 workflows:
   version: 2
   one_and_two:
