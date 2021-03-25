@@ -1,22 +1,13 @@
 version: 2
 jobs:
-  one:
-    docker:
-      - image: circleci/ruby:2.4.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  test_model:
+    executor: python/default
     steps:
       - checkout
-      - run: echo "A first hello"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspaces" > my_workspace/echo-output
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
-          root: my_workspace
-          # Must be relative path from root
-          paths:
-            - echo-output      
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - run: python3 predictModelTest.py 1 10  
   two:
     docker:
       - image: circleci/ruby:2.4.1
